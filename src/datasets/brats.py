@@ -1,5 +1,7 @@
 from .base_dataset import BaseMedicalDataset
+from src.registry.dataset_registry import register_dataset
 
+@register_dataset("brats")
 class BraTSDataset(BaseMedicalDataset):
 
     def __init__(self, root_dir, transform=None):
