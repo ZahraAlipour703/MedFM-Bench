@@ -1,7 +1,9 @@
 from src.datasets import *
-from src.registry.dataset_registry import build_dataset
+from src.registry import DATASETS
 
-dataset = build_dataset(
+print(DATASETS.keys())
+
+dataset = DATASETS.build(
     "brats",
     root_dir="datasets/raw"
 )
