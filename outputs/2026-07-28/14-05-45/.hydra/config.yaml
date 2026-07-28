@@ -1,0 +1,12 @@
+seed: 42
+dataset:
+  name: brats
+  root_dir: datasets/raw
+model:
+  name: medsam
+training:
+  batch_size: 2
+  epochs: 50
+  learning_rate: 0.0001
+experiment:
+  output_dir: results
