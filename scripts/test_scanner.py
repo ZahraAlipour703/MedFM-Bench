@@ -1,10 +1,12 @@
-from src.datasets.scanner import DatasetScanner
+from pathlib import Path
 
-scanner = DatasetScanner("datasets/raw")
+from src.datasets.loaders.nii_loader import NiftiLoader
 
-samples = scanner.scan()
+sample = Path(
+    "datasets/raw/Task01_BrainTumour/imagesTr/BRATS_001.nii.gz"
+)
 
-print(f"Found {len(samples)} patients")
+volume = NiftiLoader.load(sample)
 
-for sample in samples[:5]:
-    print(sample)
+print(volume.shape)
+print(volume.dtype)
