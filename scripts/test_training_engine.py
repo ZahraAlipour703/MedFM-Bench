@@ -29,9 +29,13 @@ class SyntheticBrainDataset(Dataset):
             generator=generator,
         )
 
+        # Patient 0: all four segmentation labels.
+        # Patient 1: no enhancing tumour (ET-negative).
+        max_label = 4 if index == 0 else 3
+
         label = torch.randint(
             0,
-            4,
+            max_label,
             (
                 self.size,
                 self.size,
