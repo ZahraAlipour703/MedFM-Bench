@@ -29,18 +29,14 @@ class SyntheticBrainDataset(Dataset):
             generator=generator,
         )
 
-        # Patient 0: all four segmentation labels.
-        # Patient 1: no enhancing tumour (ET-negative).
+        # Patient 0: includes all four classes.
+        # Patient 1: ET-negative; labels are only 0, 1, 2.
         max_label = 4 if index == 0 else 3
 
         label = torch.randint(
             0,
             max_label,
-            (
-                self.size,
-                self.size,
-                self.size,
-            ),
+            (self.size, self.size, self.size),
             generator=generator,
             dtype=torch.int64,
         )
@@ -124,6 +120,13 @@ def main():
     assert 0.0 <= val_result["tc_dice"] <= 1.0
     assert 0.0 <= val_result["et_dice"] <= 1.0
 
+    assert val_result["et_positive_patients"] == 1
+    assert val_result["et_negative_patients"] == 1
+
+    assert val_result["et_negative_fp_voxels_mean"] >= 0
+    assert val_result["et_negative_fp_voxels_max"] >= 0
+
+    print("\nET-negative patient handling: PASS")
     print("\nRESULT: PASS")
 
 
